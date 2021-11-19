@@ -9,34 +9,41 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-	// abrir pagina home
+	// Abrir pagina home
+
 	@GetMapping({ "/", "/home" })
 	public String home() {
+
 		return "home";
 	}
 
-	// abrir pagina Login
+	// Abrir pagina Login
+
 	@GetMapping({ "/login" })
 	public String login() {
+
 		return "login";
 	}
-	
-	// login invalido
-		@GetMapping({"/login-error"})
-		public String loginError(ModelMap model) {
-			model.addAttribute("alerta", "erro");
-			model.addAttribute("titulo", "Credenciais invalidas");
-			model.addAttribute("texto", "Login ou senha incorretos, tente novamente.");
-			model.addAttribute("subtexto", "Acesso permitido apenas para cadastros ja ativados.");
-			return "login";
-		}
-		
-		// Acesso Negado
-				@GetMapping({"/acesso-negado"})
-				public String acessoNegado(ModelMap model, HttpServletResponse resp) {
-					model.addAttribute("status", resp.getStatus());
-					model.addAttribute("error", "Acesso negado");
-					model.addAttribute("message", "Você não tem permissão para essa área ou ação.");
-					return "error";
-				}
+
+	// login Invalido
+
+	@GetMapping({ "/login-error" })
+	public String loginError(ModelMap model) {
+		model.addAttribute("alerta", "erro");
+		model.addAttribute("titulo", "Credenciais invalidas");
+		model.addAttribute("texto", "Login ou senha incorretos, tente novamente.");
+		model.addAttribute("subtexto", "Acesso permitido apenas para cadastros ja ativados.");
+
+		return "login";
+	}
+
+	// Acesso Negado
+
+	@GetMapping({ "/acesso-negado" })
+	public String acessoNegado(ModelMap model, HttpServletResponse resp) {
+		model.addAttribute("status", resp.getStatus());
+		model.addAttribute("error", "Acesso negado");
+		model.addAttribute("message", "Você não tem permissão para essa área ou ação.");
+		return "error";
+	}
 }

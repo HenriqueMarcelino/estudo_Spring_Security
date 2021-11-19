@@ -41,7 +41,9 @@ public class UsuarioService implements UserDetailsService {
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = buscarPorEmail(username);
-		return new User(usuario.getEmail(), usuario.getSenha(),
+		return new User(
+				usuario.getEmail(), 
+				usuario.getSenha(),
 				AuthorityUtils.createAuthorityList(getAuthorities(usuario.getPerfis())));
 	}
 
