@@ -23,9 +23,11 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	public Page<Usuario> FindByEmailOrPerfil(@Param("search") String search , Pageable pageable);
 
 	// Usamos o "IN" porque como estamos testando um lista de id é usado ele.
+
 	@Query("select distinct u from Usuario u "
 			+ "join u.perfis p "
 			+ "where u.id = :usuarioId AND p.id IN :perfisId")
 	 Optional<Usuario> findByIdAndPerfis(Long usuarioId, Long[] perfisId);
+
 
 }

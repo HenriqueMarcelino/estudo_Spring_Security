@@ -66,7 +66,7 @@ public class EspecialidadeService {
 	}
 
 	@Transactional(readOnly = true)
-	public Map<String, Object> buscarEspecialidadePorMedico(Long id, HttpServletRequest request) {
+	public Map<String, Object> buscarEspecialidadesPorMedico(Long id, HttpServletRequest request) {
 		datatables.setRequest(request);
 		datatables.setColunas(DatatablesColunas.ESPECIALIDADES);
 		Page<Especialidade> page = repository.findByIdMedico(id, datatables.getPageable());

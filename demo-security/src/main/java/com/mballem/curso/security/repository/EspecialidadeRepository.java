@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.mballem.curso.security.domain.Especialidade;
 
@@ -15,17 +16,25 @@ public interface EspecialidadeRepository extends JpaRepository<Especialidade, Lo
 	// O "%" é para ir filtrando de acordo com o que você vai digitando.
 	
 	@Query("select e from Especialidade e where e.titulo like :search%")
-	Page<?> findAllByTitulo(String search, Pageable pageable);
+	Page<Especialidade> findAllByTitulo(String string, @Param("String search") Pageable pageable);
 
 	@Query("select e.titulo from Especialidade e where e.titulo like :termo%")
-	List<String> findEspecialideByTermo(String termo);
+	List<String> findEspecialideByTermo(@Param("termo") String termo);
 
 	@Query("select e from Especialidade e where e.titulo IN :titulos")
-	Set<Especialidade> findByTitulos(String[] titulos);
+	Set<Especialidade> findByTitulos(@Param ("titulos") String[] titulos);
+	
+	
+//	@Query("select e from Especialidade e "
+//			+ "join e.medicos m "
+//			+ "where m.id = :id")
+//	Page<Especialidade> findByIdMedico(Long id, Pageable pageable);
 
-	@Query("select e from Especialidade e "
+
+	@Query("select distinct e from Especialidade e "
 			+ "join e.medicos m "
 			+ "where m.id = :id")
 	Page<Especialidade> findByIdMedico(Long id, Pageable pageable);
-
+	
+	
 }

@@ -69,7 +69,7 @@ public class EspecialidadeController {
 	@GetMapping("/datatables/server/medico/{id}")
 	public ResponseEntity<?> getEspecialidadesPorMedico(@PathVariable("id") Long id, HttpServletRequest request) {
 		
-		return ResponseEntity.ok(service.buscarEspecialidadePorMedico(id, request));
+		return ResponseEntity.ok(service.buscarEspecialidadesPorMedico(id, request));
 	}
 	
 	

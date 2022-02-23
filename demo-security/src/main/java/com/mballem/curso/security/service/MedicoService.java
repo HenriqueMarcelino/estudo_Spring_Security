@@ -37,7 +37,7 @@ public class MedicoService {
 		}
 	}
 
-	@Transactional(readOnly = false)
+	@Transactional(readOnly = true)
 	public Medico buscarPorEmail(String email) {
 		
 		return repository.findByUsuarioEmail(email).orElse(new Medico());

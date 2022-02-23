@@ -25,7 +25,7 @@ public class MedicoController {
     @Autowired
  	private UsuarioService usuarioService;
 	
-	//Abrir pagina de dados pessoais de medicos pelo MEDICO
+	// Abrir pagina de dados pessoais de medicos pelo MEDICO
 	
 	@GetMapping({"/dados"})
 	public String abrirPorMedico(Medico medico, ModelMap model, @AuthenticationPrincipal User user) {
@@ -37,7 +37,7 @@ public class MedicoController {
 		return "medico/cadastro";
 	}
 	
-		//Salvar Medico
+		// Salvar Medico
 	
 		@PostMapping({"/salvar"})
 		public String salvar(Medico medico, RedirectAttributes attr, @AuthenticationPrincipal User user) {
