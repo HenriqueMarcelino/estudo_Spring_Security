@@ -42,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// so vai pode acessar aquele perfil e não o do outro que seria medico/...
 
 				// ACESSOS PRIVADOS ADMIN
+				.antMatchers("/u/editar/senha", "/u/confirmar/senha").hasAnyAuthority("MEDICO,PACIENTE")
 				.antMatchers("/u/**").hasAuthority("ADMIN")
 
 				// ACESSOS PRIVADOS MEDICOS
@@ -50,10 +51,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 				// ACESSOS PRIVADOS PACIENTE
 				.antMatchers("/paciente/**").hasAuthority("PACIENTE")
-
+  
 				// ACESSOS PRIVADOS ESPECIALIDADES
 				.antMatchers("/especialidades/datatables/server/medico/*").hasAnyAuthority("MEDICO,ADMIN")
-				.antMatchers("/especialidades/titulo").hasAnyAuthority("MEDICO,ADMIN")
+				.antMatchers("/especialidades/titulo").hasAnyAuthority("MEDICO,ADMIN,PACIENTE")
 				.antMatchers("/especialidades/**").hasAuthority("ADMIN")
 
 				.anyRequest().authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/", true)

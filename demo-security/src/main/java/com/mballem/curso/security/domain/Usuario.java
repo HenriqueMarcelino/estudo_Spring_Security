@@ -52,7 +52,7 @@ public class Usuario extends AbstractEntity {
 	public Usuario(String email) {
 		this.email = email;
 	}
-	
+		
 	public String getEmail() {
 		return email;
 	}

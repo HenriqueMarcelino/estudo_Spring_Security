@@ -61,7 +61,7 @@ public class EspecialidadeController {
 	
 	@GetMapping("/titulo")
 	public ResponseEntity<?> getEspecialidadesPorTermo(@RequestParam("termo") String termo) {
-		List<String> especialidades = service.buscarEspecialidadesByTermo(termo);
+		List<String> especialidades = service.buscarEspecialidadeByTermo(termo);
 		
 		return ResponseEntity.ok(especialidades);
 	}

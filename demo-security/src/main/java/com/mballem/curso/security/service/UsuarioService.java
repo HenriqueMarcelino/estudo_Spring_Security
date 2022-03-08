@@ -90,4 +90,16 @@ public class UsuarioService implements UserDetailsService {
 				.orElseThrow(() -> new UsernameNotFoundException("Usuario inexistente!"));
 	}
 
+	public static boolean isSenhaCorreta(String senhaDigitada, String senhaArmazenada) {
+		
+		return new BCryptPasswordEncoder().matches(senhaDigitada, senhaArmazenada);
+	}
+
+	@Transactional(readOnly = false)
+	public void alterarSenha(Usuario usuario, String senha) {
+		usuario.setSenha((new BCryptPasswordEncoder().encode(senha)));
+		repository.save(usuario);
+		
+	}
+
 }
