@@ -27,16 +27,17 @@
 
 							<div th:replace="fragments/alert :: alerta-sucesso"></div>
 
-							<form th:action="@{/agendamentos/salvar}"
-								th:object="${agendamento}" method="POST" class="was-validated">
+							<form th:action="@{/agendamentos/salvar}" th:object="${agendamento}" 
+								  method="POST" class="was-validated">
 
 								<div class="form-row">
 									<div class="form-group col-md-12">
 										<small class="form-text text-muted">Selecione a
 											especialidade médica referente a sua consulta.</small> 
-											<input type="text" class="form-control" id="especialidade"
-											placeholder="Pediatria" th:field="*{especialidade.titulo}"
-											required />
+										<input type="text" class="form-control" 
+												id="especialidade"
+												placeholder="Pediatria" 
+												th:field="*{especialidade.titulo}" required />
 										<div class="invalid-feedback">Especialidade é
 											obrigatória.</div>
 									</div>
@@ -56,7 +57,8 @@
 								<div class="form-row">
 									<div class="form-group col-md-12">
 										<small class="form-text text-muted">Selecione a data
-											da consulta</small> <input class="form-control" type="date" id="data"
+											da consulta</small> 
+										<input class="form-control" type="date" id="data"
 											th:field="*{dataConsulta}" required />
 										<div class="invalid-feedback">Data é obrigatória.</div>
 									</div>
@@ -65,9 +67,9 @@
 								<div class="form-row">
 									<div class="form-group col-md-12">
 										<small id="hr-small" class="form-text text-muted">Horários
-											disponíveis para a consulta</small> <select id="horarios"
-											class="custom-select" size="5" th:field="*{horario.id}"
-											required>
+											disponíveis para a consulta</small> 
+										<select id="horarios"
+											class="custom-select" size="5" th:field="*{horario.id}" required>
 											<option th:value="*{horario.id}"
 												th:text="*{horario.horaMinuto}"></option>
 										</select>
@@ -89,16 +91,16 @@
 							<hr />
 
 							<h2>Especialidades Médicas</h2>
-							<table id="table-medico-especializacao" 
-							class="table table-sm table-striped table-bordered nowrap"
-							style="width: 100%"> 
-							<thead class="thead-dark">
-								<tr>
-									<th scope="col">#</th>
-									<th scope="col">Especialidade</th>
-									<th scope="col">Excluir</th>
-								</tr>
-							</thead>
+							<table id="table-medico-especializacao"
+								class="table table-sm table-striped table-bordered nowrap"
+								style="width: 100%">
+								<thead class="thead-dark">
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Especialidade</th>
+										<th scope="col">Excluir</th>
+									</tr>
+								</thead>
 							</table>
 						</div>
 					</div>
@@ -108,7 +110,7 @@
 		</main>
 
 	</section>
-	<script th:src="@{/js.medico.js(v=${version})}" th:fragment="js"></script>
+	<script th:src="@{/js/medico.js(v=${version})}" th:fragment="js"></script>
 	<script th:inline="javascript" th:fragment="inlinescript"></script>
 </body>
 </html>

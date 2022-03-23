@@ -17,7 +17,7 @@ import com.mballem.curso.security.domain.Usuario;
 public interface MedicoRepository extends JpaRepository<Medico, Long>{
 
 	@Query("select m from Medico m where m.usuario.id = :id")
-	Optional<Medico> findByUsuarioId(@Param ("id")Long id);
+	Optional<Medico> findByUsuarioId(@Param("id")Long id);
 	
 	@Query("select m from Medico m where m.usuario.email like :email")
 	Optional<Medico> findByUsuarioEmail(@Param("email") String email);

@@ -47,7 +47,7 @@ public class PacienteController {
 		if (UsuarioService.isSenhaCorreta(paciente.getUsuario().getSenha(), u.getSenha())) {
 			paciente.setUsuario(u);
 			service.save(paciente);
-			model.addAttribute("sucesso", "Dados atualizados com sucesso!!");
+			model.addAttribute("sucesso", "Seus dados atualizados com sucesso!!");
 		} else {
 			model.addAttribute("falha", "Sua senha não confere, tente novamente.");
 		}
@@ -63,11 +63,12 @@ public class PacienteController {
 		Usuario u = usuarioService.buscarPorEmail(user.getUsername());
 		if (UsuarioService.isSenhaCorreta(paciente.getUsuario().getSenha(), u.getSenha())) {
 			service.editar(paciente);
-			model.addAttribute("sucesso", "Dados editados com sucesso!!");
+			model.addAttribute("sucesso", "Seus dados foram editados com sucesso!!");
 		} else {
 			model.addAttribute("falha", "Sua senha não confere, tente novamente.");
 		}
 		return "paciente/cadastro";
 	}
+	
 
 }

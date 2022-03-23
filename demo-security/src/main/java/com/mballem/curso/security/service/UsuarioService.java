@@ -41,9 +41,7 @@ public class UsuarioService implements UserDetailsService {
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = buscarPorEmail(username);
-		return new User(
-				usuario.getEmail(), 
-				usuario.getSenha(),
+		return new User(usuario.getEmail(), usuario.getSenha(),
 				AuthorityUtils.createAuthorityList(getAuthorities(usuario.getPerfis())));
 	}
 
@@ -61,10 +59,9 @@ public class UsuarioService implements UserDetailsService {
 	public Map<String, Object> buscarTodos(HttpServletRequest request) {
 		datatables.setRequest(request);
 		datatables.setColunas(DatatablesColunas.USUARIOS);
-		Page<Usuario> page = datatables.getSearch().isEmpty()
-				? repository.findAll(datatables.getPageable())
+		Page<Usuario> page = datatables.getSearch().isEmpty() ? repository.findAll(datatables.getPageable())
 				: repository.FindByEmailOrPerfil(datatables.getSearch(), datatables.getPageable());
-			
+
 		return datatables.getResponse(page);
 	}
 
@@ -72,26 +69,26 @@ public class UsuarioService implements UserDetailsService {
 	public void salvarUsuario(Usuario usuario) {
 		String crypt = new BCryptPasswordEncoder().encode(usuario.getSenha());
 		usuario.setSenha(crypt);
-		
+
 		repository.save(usuario);
-		
+
 	}
-	
+
 	@Transactional(readOnly = true)
 	public Usuario buscarPorId(Long id) {
-		
+
 		return repository.findById(id).get();
 	}
 
 	@Transactional(readOnly = true)
 	public Usuario buscarPorIdEPerfis(Long usuarioId, Long[] perfisId) {
-		
+
 		return repository.findByIdAndPerfis(usuarioId, perfisId)
 				.orElseThrow(() -> new UsernameNotFoundException("Usuario inexistente!"));
 	}
 
 	public static boolean isSenhaCorreta(String senhaDigitada, String senhaArmazenada) {
-		
+
 		return new BCryptPasswordEncoder().matches(senhaDigitada, senhaArmazenada);
 	}
 
@@ -99,7 +96,7 @@ public class UsuarioService implements UserDetailsService {
 	public void alterarSenha(Usuario usuario, String senha) {
 		usuario.setSenha((new BCryptPasswordEncoder().encode(senha)));
 		repository.save(usuario);
-		
+
 	}
 
 }

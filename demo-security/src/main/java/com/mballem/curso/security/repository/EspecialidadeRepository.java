@@ -16,20 +16,20 @@ import com.mballem.curso.security.domain.Especialidade;
 public interface EspecialidadeRepository extends JpaRepository<Especialidade, Long>{
 
 	// O "%" é para ir filtrando de acordo com o que você vai digitando.
-	
+
 	@Query("select e from Especialidade e where e.titulo like :search%")
-	Page<Especialidade> findAllByTitulo(String string, @Param("String search") Pageable pageable);
+	Page<Especialidade> findAllByTitulo(@Param("search") String search, Pageable pageable);
 
 	@Query("select e.titulo from Especialidade e where e.titulo like :termo%")
 	List<String> findEspecialidesByTermo(@Param("termo") String termo);
 
 	@Query("select e from Especialidade e where e.titulo IN :titulos")
-	Set<Especialidade> findByTitulos(@Param ("titulos") String[] titulos);
+	Set<Especialidade> findByTitulos(@Param("titulos") String[] titulos);
 	
 	@Query("select e from Especialidade e "
 			+ "join e.medicos m "
  			+ "where m.id = :id")
-	 Page<Especialidade> findByIdMedico(@Param ("id") Long id, Pageable pageable);
+	 Page<Especialidade> findByIdMedico(@Param("id") Long id, Pageable pageable);
 
 	
 	
